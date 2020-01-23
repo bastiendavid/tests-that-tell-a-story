@@ -2,6 +2,7 @@ package org.kata
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.kata.Message.Companion.successMessage
 
 class DepositMoneyOnAnAccount {
 
@@ -44,4 +45,13 @@ class DepositMoneyOnAnAccount {
         assertThat(account.money).isEqualTo(allOurMoney)
     }
 
+    @Test
+    fun `When I deposit money on my account, I get a success message`() {
+        val account = Account()
+        val money = someMoney(30)
+
+        val message = account.deposit(money)
+
+        assertThat(message).isEqualTo(successMessage)
+    }
 }

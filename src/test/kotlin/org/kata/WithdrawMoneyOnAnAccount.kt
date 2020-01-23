@@ -2,10 +2,10 @@ package org.kata
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.kata.Message.Companion.failureMessage
+import org.kata.Message.Companion.withdrawOperationFailureMessage
 import org.kata.Message.Companion.successMessage
 
-class ATest {
+class WithdrawMoneyOnAnAccount {
 
     @Test
     fun `I can withdraw some money on an account on which I have made a deposit first`() {
@@ -45,7 +45,7 @@ class ATest {
         val message = account.withdraw(someMoney(30))
 
         // Then
-        assertThat(message).isEqualTo(failureMessage)
+        assertThat(message).isEqualTo(withdrawOperationFailureMessage)
     }
 
     @Test

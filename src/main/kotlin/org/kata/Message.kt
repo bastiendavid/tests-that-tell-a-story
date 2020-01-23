@@ -4,7 +4,9 @@ class Message(val message: String) {
 
     companion object {
         @JvmStatic
-        val failureMessage = Message("you do not have enough money")
+        val withdrawOperationFailureMessage = Message("you do not have enough money")
+        @JvmStatic
+        val depositOperationFailureMessage = Message("Deposit operation failed")
         @JvmStatic
         val successMessage = Message("Success")
     }
