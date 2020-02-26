@@ -3,10 +3,15 @@ package org.kata
 import org.kata.Message.Companion.depositOperationFailureMessage
 import org.kata.Message.Companion.withdrawOperationFailureMessage
 import org.kata.Message.Companion.successMessage
+import org.kata.Message.Companion.withdrawOperationDailyLimitReachedMessage
 import org.kata.Money.Companion.NO_MONEY
 
 class Account {
 
+    companion object {
+        @JvmStatic
+        val WITHDRAL_DAILY_LIMIT = Money(10000)
+    }
 
     var money: Money = NO_MONEY
 
@@ -17,6 +22,9 @@ class Account {
 
 
     fun withdraw(money: Money): Message {
+        if (money > WITHDRAL_DAILY_LIMIT) {
+            return withdrawOperationDailyLimitReachedMessage
+        }
         if (money > this.money) {
             return withdrawOperationFailureMessage
         }

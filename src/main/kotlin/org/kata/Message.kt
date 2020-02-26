@@ -9,6 +9,8 @@ class Message(val message: String) {
         val depositOperationFailureMessage = Message("Deposit operation failed")
         @JvmStatic
         val successMessage = Message("Success")
+        @JvmStatic
+        val withdrawOperationDailyLimitReachedMessage = Message("you have exceeded your daily withdrawal limit")
     }
 
 }
