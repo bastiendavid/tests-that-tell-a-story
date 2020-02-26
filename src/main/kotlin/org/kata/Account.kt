@@ -39,6 +39,7 @@ class Account {
     }
 
     fun transferToInternalAccount(money: Money, debit: InternalAccount) {
+        debit.deposit(money)
         this.withdraw(money)
     }
 
