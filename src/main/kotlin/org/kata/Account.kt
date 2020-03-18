@@ -1,12 +1,12 @@
 package org.kata
 
 import org.kata.Message.Companion.depositOperationFailureMessage
-import org.kata.Message.Companion.withdrawOperationFailureMessage
 import org.kata.Message.Companion.successMessage
 import org.kata.Message.Companion.withdrawOperationDailyLimitReachedMessage
+import org.kata.Message.Companion.withdrawOperationFailureMessage
 import org.kata.Money.Companion.NO_MONEY
 
-class Account {
+class Account(val logger: TransactionLogger = TransactionLogger.DEFAULT) {
 
     companion object {
         @JvmStatic
@@ -17,6 +17,7 @@ class Account {
 
     fun deposit(money: Money): Message {
         this.money = this.money + money
+        logger.logDebit(this.money, money)
         return successMessage
     }
 
@@ -26,9 +27,11 @@ class Account {
             return withdrawOperationDailyLimitReachedMessage
         }
         if (money > this.money) {
+            logger.logCreditFailure(this.money, money, withdrawOperationFailureMessage)
             return withdrawOperationFailureMessage
         }
         this.money = this.money - money
+        logger.logCredit(this.money, money)
         return successMessage
     }
 

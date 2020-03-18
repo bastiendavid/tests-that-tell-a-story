@@ -1,6 +1,6 @@
 package org.kata
 
-class Message(val message: String) {
+data class Message(val message: String) {
 
     companion object {
         @JvmStatic
